@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ControladorVistas;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,11 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('Formulario', function () {
-    return view('Formulario');
-});
 
-Route::get('Tabla', function () {
-    return view('Tabla');
-});
+
+Route::controller(ControladorVistas::class)->group(
+    function(){
+        
+        Route::get('Formulario','vistaFormulario');
+        Route::get('Tabla','vistaTabla');
+
+    });
+
+Route::post('guardardatos', [ControladorVistas::class,'datosformulario'] );
+
 
